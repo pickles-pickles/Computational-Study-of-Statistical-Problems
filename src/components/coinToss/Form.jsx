@@ -1,6 +1,6 @@
 import React from "react";
 
-const Form = ({ setInput, tossCoin, input }) => {
+const Form = ({ setInput, tossCoin, input, setIsCoinTossed }) => {
     //setInput(50);
     const handleChange = (e) => {
         setInput(e.target.value);
@@ -9,9 +9,8 @@ const Form = ({ setInput, tossCoin, input }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("before toss");
+        setIsCoinTossed(true);
         tossCoin();
-        console.log("after toss");
     }
 
     return (

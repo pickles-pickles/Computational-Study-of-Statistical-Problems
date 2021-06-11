@@ -10,6 +10,7 @@ function App() {
   
   const [input, setInput] = useState(0);
   const [result, setResult] = useState([]);
+  const [isCoinTossed, setIsCoinTossed] = useState(false);
 
   const tossCoin = () => {
    /*  let sum = 0;
@@ -48,12 +49,13 @@ let t0= performance.now();
         <div className="container">
           <div className="row">
             <div className="col-6">
-              <Form setInput={setInput} input={input} tossCoin={tossCoin} />
+              <Form setInput={setInput} input={input} tossCoin={tossCoin}
+              setIsCoinTossed={setIsCoinTossed} />
             </div>
             
           </div>
           <div className="row">
-            <Result input={input} result={result} />
+            <Result input={input} result={result} isCoinTossed={isCoinTossed} />
             
             
           </div>
