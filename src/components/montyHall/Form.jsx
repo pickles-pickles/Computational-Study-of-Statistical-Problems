@@ -67,7 +67,7 @@ const Form2 = ({ input2, setInput2, result2, setResult2, setIsShowDone }) => {
              but it can NOT be the "car" */
             for (let j = 0; j <= 2; j++) {
                 if (unknownDoors[j] === "goat") {
-                    unknownDoors.splice(i, 1);
+                    unknownDoors.splice(j, 1);
                     break;
                 }
                 else if (unknownDoors[j] === "car") {
@@ -81,7 +81,7 @@ const Form2 = ({ input2, setInput2, result2, setResult2, setIsShowDone }) => {
             } else {
                 withSwitchFailure++;
             }
-
+console.log("uknown doors", unknownDoors)
         }
 
         let t1 = performance.now();
