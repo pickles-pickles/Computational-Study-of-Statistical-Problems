@@ -9,39 +9,41 @@ import Result2 from './components/montyHall/Result';
 
 function App() {
 
-  
+
   const [input, setInput] = useState(0);
   const [result, setResult] = useState([]);
   const [isCoinTossed, setIsCoinTossed] = useState(false);
 
   const [input2, setInput2] = useState(0);
   const [result2, setResult2] = useState([]);
+  const [isShowDone, setIsShowDone] = useState(false);
 
 
   return (
     <React.Fragment>
-     {/*  <FunctionalProvider> */}
-        <div className="container">
-          <div className="row">
-            <div className="col-12">
-              <Form setInput={setInput} input={input} result={result} setResult={setResult}
+      {/*  <FunctionalProvider> */}
+      <div className="container">
+        <div className="row">
+          <div className="col-12">
+            <Form setInput={setInput} input={input} result={result} setResult={setResult}
               setIsCoinTossed={setIsCoinTossed} />
-            </div>
-            
-          </div>
-          <div className="row">
-            <Result input={input} result={result} isCoinTossed={isCoinTossed} />
-          </div>
-          <div className="row">
-            <Form2 input2={input2} setInput2={setInput2} result2={result2} setResult2={setResult2}
-               />
-          </div>
-          <div className="row">
-            <Result2 />
           </div>
 
         </div>
-     {/*  </FunctionalProvider> */}
+        <div className="row">
+          <Result input={input} result={result} isCoinTossed={isCoinTossed} />
+        </div>
+        <div className="row">
+          <Form2 input2={input2} setInput2={setInput2} result2={result2} setResult2={setResult2}
+            setIsShowDone={setIsShowDone}
+          />
+        </div>
+        <div className="row">
+          <Result2 isShowDone={isShowDone} result2={result2} />
+        </div>
+
+      </div>
+      {/*  </FunctionalProvider> */}
 
     </React.Fragment>
   );

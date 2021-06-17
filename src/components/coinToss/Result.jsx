@@ -9,7 +9,7 @@ const Result = ({ isCoinTossed, result }) => {
             {isCoinTossed ?
                 <>
                     <p>This is the result</p>
-                    <h3>The coin was tossed: {result[0]+result[1]} times</h3>
+                    <h3>The coin was tossed: {result[0] + result[1]} times</h3>
                     <h3>Showed heads: {result[0]} times</h3>
                     <h3>Showed tails: {result[1]} times</h3>
                     <h3>So, you got heads with a probability: {result[2]} % </h3>
