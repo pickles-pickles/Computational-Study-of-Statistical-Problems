@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-const Form2 = ({ input2, setInput2, result2, setResult2, setIsShowDone }) => {
+const Form2 = ({ input2, setInput2, result2, setResult2, setIsShowDone, isChangeable, doors, setDoors }) => {
+
+    /*   useEffect(()=>{
+          console.log("Param is ", param1)
+      },[]) */
     const handleChange = (e) => {
         setInput2(e.target.value);
         console.log(input2)
@@ -8,12 +12,19 @@ const Form2 = ({ input2, setInput2, result2, setResult2, setIsShowDone }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if(input2){
+        console.log("doors ", doors)
+        console.error("Number of doors is ", doors)
+        if (input2) {
             setIsShowDone(true);
-        PickDoor();
-        return;
+            PickDoor();
+            return;
         }
         return setIsShowDone(false);
+    }
+
+    const handleDoorsChange = (e) => {
+        setDoors(e.target.value);
+
     }
 
     const PickDoor = () => {
@@ -22,18 +33,19 @@ const Form2 = ({ input2, setInput2, result2, setResult2, setIsShowDone }) => {
         let success = 0, failure = 0, withSwitchSuccess = 0, withSwitchFailure = 0;
 
         let t0 = performance.now();
-
+        /* Perform show as many times as input2 */
         for (let i = 0; i < input2; i++) {
             let ar = [];
             //assign random values to doors
-            for (let i = 0; i <= 2; i++) {
+            let carIndex = Math.floor(doors * Math.random());
+            /* for (let i = 0; i <= 2; i++) {
                 ar[i] = Math.random();
             };
-            console.log(ar);
-            let a = ar[0], b = ar[1], c = ar[2];
+            console.log(ar); */
+            /* let a = ar[0], b = ar[1], c = ar[2]; */
             //the bigger value is the car
-            for (let i = 0; i <= 2; i++) {
-                if (ar[i] === Math.max(a, b, c)) {
+            for (let i = 0; i < doors; i++) {
+                if (i === carIndex) {
                     ar[i] = "car"
                 }
                 else {
@@ -42,7 +54,7 @@ const Form2 = ({ input2, setInput2, result2, setResult2, setIsShowDone }) => {
             }
             console.log("after getting string values ", ar)
             //Take(choose) one door
-            let choiceIndex = Math.floor(3 * Math.random())
+            let choiceIndex = Math.floor(doors * Math.random())
             let choice = ar[choiceIndex]
 
             if (choice === "car") {
@@ -55,7 +67,13 @@ const Form2 = ({ input2, setInput2, result2, setResult2, setIsShowDone }) => {
 
             //Put the remaining options in unknown doors
             let unknownDoors = [];
-            for (let j = 0; j <= 2; j++) {
+            for (let j = 0; j < doors; j++) {
+               /*  if (choiceIndex !== j){
+                    unknownDoors.push(ar[j])
+                }
+                else{
+                    continue;
+                } */
                 if (choiceIndex === j) {
                     continue;
                 } else {
@@ -65,23 +83,25 @@ const Form2 = ({ input2, setInput2, result2, setResult2, setIsShowDone }) => {
 
             /* the presenter opens a door, If it's the "goat" it is revealed(stops to be unknown and removed from unknownDoors).
              but it can NOT be the "car" */
-            for (let j = 0; j <= 2; j++) {
+            /* for (let j = 0; j < doors; j++) {
                 if (unknownDoors[j] === "goat") {
                     unknownDoors.splice(j, 1);
-                    break;
+            
                 }
                 else if (unknownDoors[j] === "car") {
                     continue;
                 }
-            }
+            } */
+            let filteredDoor = unknownDoors.filter(x=>x==="car").map(x=>x)
             /* Switch happens. That means that the contestant takes the remaining door.
             So, if the remaining unknown door contains the car, it is success, else it is failure  */
-            if (unknownDoors[0] === "car") {
+            if (filteredDoor[0] === "car") {
                 withSwitchSuccess++;
             } else {
                 withSwitchFailure++;
             }
-console.log("uknown doors", unknownDoors)
+            console.log("uknown doors", unknownDoors)
+            console.log("filtered door", filteredDoor)
         }
 
         let t1 = performance.now();
@@ -103,32 +123,20 @@ console.log("uknown doors", unknownDoors)
         return result2;
     }
 
-
-    /* let car=ar[0];
-    for (let i=0; i<=2; i++){
-        if(ar[i]>car){
-            car=ar[i];
-            ar[i]="car"
-            
-        } else if (ar[i]<=car){
-            ar[i]="goat";
-        }
-    }
-    car="car";
-    console.log("after soert",ar) */
-
     return (
         <React.Fragment>
             <h1>This is Monty Hall form</h1>
             <form>
                 <input type="number" name="input" onChange={handleChange}>
                 </input>
+                {isChangeable ? <input type="number" name="doors" placeholder="Number of doors" onChange={handleDoorsChange}>
+                </input> :
+                    null}
                 <button className="btn btn-warning"
                     onClick={handleSubmit}
                 >Toss the coin</button>
             </form>
         </React.Fragment>
-
     );
 }
 

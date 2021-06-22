@@ -17,6 +17,10 @@ function App() {
   const [input2, setInput2] = useState(0);
   const [result2, setResult2] = useState([]);
   const [isShowDone, setIsShowDone] = useState(false);
+  /* const [param1, setParam1] = useState("This value");
+  const [param2, setParam2] = useState("Other value") */
+  const [isChangeable, setIsChangeable] = useState();
+  const [doors, setDoors] = useState(0)
 
 
   return (
@@ -35,7 +39,15 @@ function App() {
         </div>
         <div className="row">
           <Form2 input2={input2} setInput2={setInput2} result2={result2} setResult2={setResult2}
-            setIsShowDone={setIsShowDone}
+            setIsShowDone={setIsShowDone} isChangeable={false} doors={3} setDoors={setDoors}
+          />
+        </div>
+        <div className="row">
+          <Result2 isShowDone={isShowDone} result2={result2} />
+        </div>
+        <div className="row">
+          <Form2 input2={input2} setInput2={setInput2} result2={result2} setResult2={setResult2}
+            setIsShowDone={setIsShowDone} isChangeable={true} doors={doors} setDoors={setDoors}
           />
         </div>
         <div className="row">
