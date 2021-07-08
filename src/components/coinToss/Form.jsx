@@ -1,6 +1,6 @@
 import React from "react";
 
-const Form = ({ setInput, result, setResult, input, setIsCoinTossed }) => {
+const Form = ({ setInput, result, setResult, input, setIsCoinTossed, setIsCoinInAir }) => {
     //setInput(50);
     const handleChange = (e) => {
         setInput(e.target.value);
@@ -21,7 +21,7 @@ const Form = ({ setInput, result, setResult, input, setIsCoinTossed }) => {
     const tossCoin = () => {
 
         var heads = 0, tails = 0;
-
+        setIsCoinInAir(true);
         let t0 = performance.now();
         for (let i = 0; i < input; i++) {
             let x = Math.floor(1000 * Math.random());
@@ -34,6 +34,9 @@ const Form = ({ setInput, result, setResult, input, setIsCoinTossed }) => {
             console.log("Coin tossed " + i + " times")
         }
         let t1 = performance.now();
+
+        setIsCoinInAir(false);
+
         let headsPercent = 100 * heads / input;
         let tailsPercent = 100 * tails / input;
         let executionTime = t1 - t0;
@@ -55,7 +58,8 @@ const Form = ({ setInput, result, setResult, input, setIsCoinTossed }) => {
                 <option value="10">1000</option>
             </select> */}
             <form>
-                <input type="number" name="input" onChange={handleChange}>
+                <input type="number" name="input" onChange={handleChange} className="form-control"
+                placeholder="How many times to toss the coin?" >
                 </input>
                 <button className="btn btn-warning"
                     onClick={handleSubmit}

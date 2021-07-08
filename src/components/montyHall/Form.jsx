@@ -38,11 +38,7 @@ const Form2 = ({ input2, setInput2, result2, setResult2, setIsShowDone, isChange
             let ar = [];
             //assign random values to doors
             let carIndex = Math.floor(doors * Math.random());
-            /* for (let i = 0; i <= 2; i++) {
-                ar[i] = Math.random();
-            };
-            console.log(ar); */
-            /* let a = ar[0], b = ar[1], c = ar[2]; */
+           
             //the bigger value is the car
             for (let i = 0; i < doors; i++) {
                 if (i === carIndex) {
@@ -127,14 +123,16 @@ const Form2 = ({ input2, setInput2, result2, setResult2, setIsShowDone, isChange
         <React.Fragment>
             <h1>This is Monty Hall form</h1>
             <form>
-                <input type="number" name="input" onChange={handleChange}>
+                <input type="number" name="input" onChange={handleChange} className="form-control"
+                placeholder="How many times to run the Show?" >
                 </input>
-                {isChangeable ? <input type="number" name="doors" placeholder="Number of doors" onChange={handleDoorsChange}>
+                {isChangeable ? <input type="number" name="doors" placeholder="Number of doors" onChange={handleDoorsChange}
+                className="form-control">
                 </input> :
                     null}
                 <button className="btn btn-warning"
                     onClick={handleSubmit}
-                >Toss the coin</button>
+                >Run the Show</button>
             </form>
         </React.Fragment>
     );
