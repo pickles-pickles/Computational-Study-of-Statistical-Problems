@@ -19,11 +19,10 @@ function App() {
   const [input2, setInput2] = useState(0);
   const [result2, setResult2] = useState([]);
   const [isShowDone, setIsShowDone] = useState(false);
-  /* const [param1, setParam1] = useState("This value");
-  const [param2, setParam2] = useState("Other value") */
-  const [isChangeable, setIsChangeable] = useState();
   const [doors, setDoors] = useState(0)
 
+  const maxReps =1000000;
+  const maxDoors = 10000;
 
   return (
     <React.Fragment>
@@ -31,27 +30,31 @@ function App() {
       <div className="container">
         {isModalOpen? <InfoModal setIsModalOpen={setIsModalOpen} /> :
         null }
+
         <div className="row">
           <div className="col-12">
             <Form setInput={setInput} input={input} result={result} setResult={setResult}
-              setIsCoinTossed={setIsCoinTossed} setIsCoinInAir={setIsCoinInAir} />
+              setIsCoinTossed={setIsCoinTossed} setIsCoinInAir={setIsCoinInAir} maxReps={maxReps} />
           </div>
 
         </div>
         <div className="row">
-          {isCoinTossed?
-            <Result input={input} result={result} isCoinTossed={isCoinTossed} isCoinInAir={isCoinInAir} /> :
-           <h1>Toss the coin</h1>}
+          
+            <Result input={input} result={result} isCoinTossed={isCoinTossed} isCoinInAir={isCoinInAir}
+             maxReps={maxReps} /> 
+           
          
         </div>
           
         <div className="row">
           <Form2 input2={input2} setInput2={setInput2} result2={result2} setResult2={setResult2}
             setIsShowDone={setIsShowDone} isChangeable={true} doors={doors} setDoors={setDoors}
+            maxReps={maxReps} maxDoors={maxDoors}
           />
         </div>
         <div className="row">
-          <Result2 isShowDone={isShowDone} result2={result2} />
+          <Result2 isShowDone={isShowDone} result2={result2} input2 = {input2} doors={doors}
+          maxReps={maxReps} maxDoors={maxDoors} />
         </div>
 
       </div>

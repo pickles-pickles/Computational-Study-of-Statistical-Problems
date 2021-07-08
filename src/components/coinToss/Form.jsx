@@ -1,7 +1,7 @@
 import React from "react";
 
-const Form = ({ setInput, result, setResult, input, setIsCoinTossed, setIsCoinInAir }) => {
-    //setInput(50);
+const Form = ({ setInput, result, setResult, input, setIsCoinTossed, setIsCoinInAir, maxReps }) => {
+
     const handleChange = (e) => {
         setInput(e.target.value);
         console.log(input)
@@ -9,13 +9,12 @@ const Form = ({ setInput, result, setResult, input, setIsCoinTossed, setIsCoinIn
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if(input){
+        if(input && input< maxReps){
             setIsCoinTossed(true);
         tossCoin();
         return;
         }
         return setIsCoinTossed(false);
-        
     };
 
     const tossCoin = () => {
@@ -50,18 +49,13 @@ const Form = ({ setInput, result, setResult, input, setIsCoinTossed, setIsCoinIn
 
     return (
         <React.Fragment>
-            <h1>How many times toss the coin? Fill in the input</h1>
-            {/* <select className="form-control" ref="selectRef">
-                <option value="10">10</option>
-                <option value="10">50</option>
-                <option value="10">100</option>
-                <option value="10">1000</option>
-            </select> */}
+            <h1>How many times to toss the coin? Fill in the input</h1>
+
             <form>
                 <input type="number" name="input" onChange={handleChange} className="form-control"
                 placeholder="How many times to toss the coin?" >
                 </input>
-                <button className="btn btn-warning"
+                <button className="btn btn-warning my-2"
                     onClick={handleSubmit}
                 >Toss the coin</button>
             </form>

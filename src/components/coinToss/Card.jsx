@@ -1,5 +1,4 @@
 import React from 'react';
-import CoinModal from './CoinModal';
 import Result from './Result';
 
 const Card = ({isCoinInAir, isCoinTossed, result, input}) => {
